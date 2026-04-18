@@ -1,0 +1,35 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+.intoductionPage{
+    width:100%;
+    min-height:100vh;
+    background-image: linear-gradient(45deg,#16BBE5 50% , white 50%);
+}
+.selectYourRole{
+    width:80%;
+    min-height:80vh;
+    background-color: whitesmoke
+}
+.photoStyle{
+    max-width:140px;
+    width:auto;
+}
+.header{
+    height: 30%;
+}
+.RoleStyle{
+    width:200px;
+}
+.boxwidth
+{
+    max-width: 250px;
+    min-width: 230px;
+}
+.boxwidth:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    scale: 1.1;
+    box-shadow: 0px 0px 3px blue;
+}
