@@ -1,6 +1,14 @@
 
 .form-login{
-    width:50%;
-    min-height:90vh;
+    margin:10px;
+    /* width:70%; */
+    max-width:800px;
+    min-height:50vh;
     background-color: whitesmoke;
+}
+.login12{
+    max-width:100px;
+}
+.forgetPassword{
+    cursor: pointer;
 }

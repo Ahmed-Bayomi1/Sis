@@ -88,6 +88,7 @@ export default function AffairRegisterationForm(){
     
     //API request
     let x = 0;
+    let y =0;
     function CheckPassword(){
         for(let i = 0;i<data.password.length ; i++){
             if((data.password[i] >= 0 && data.password[i]<=9) || (data.password[i]>='a' && data.password[i]<='z') ||(data.password[i]>='A' && data.password[i]<="Z"))
@@ -95,11 +96,18 @@ export default function AffairRegisterationForm(){
                 ++x;
             }
         }
+        for(let i = 0;i<data.password.length ; i++){
+            if( (data.password[i]>='a' && data.password[i]<='z'))
+            {
+                ++y;
+            }
+        }
     }
+
     CheckPassword();
     const sendData = async(event)=>{
         event.preventDefault();
-        if((data.password.length >= 8) && (data.password === data.confirmedPassword) && (data.fullName.length >= 7) && (data.phone.length ===11) && (x!==data.password.length)){
+        if((data.password.length >= 8) && (data.password === data.confirmedPassword) && (data.fullName.length >= 7) && (data.phone.length ===11) && (x!==data.password.length) && (data.adminCode ==="ADMIN_SECRET_2024") && (y>0) ){
             try{
                 setSuccessModal(true);
                 selFailmodal(false);
@@ -113,14 +121,20 @@ export default function AffairRegisterationForm(){
                 formData.append("AdminCode",data.adminCode);
                 formData.append("AgreeToTerms",data.terms);
                 formData.append("Role", 1);
-                const res = await axios.post("",formData);
+                const res = await axios.post("https://ssis.runasp.net/api/Auth/register",formData);
             }
             catch(error){
                 console.log("ERROR DATA:", error.response?.data);
                 console.log("STATUS:", error.response?.status);
                 }
         }else{
-                if(x === data.password.length){
+                if(y === 0){
+                    setMessage("password must have at least one character")
+                }
+                else if(data.adminCode !== "ADMIN_SECRET_2024"){
+                    setMessage("Wrong Admin Code");
+                }
+                else if(x === data.password.length){
                     setMessage("Password Must Have Special Character");
                 }
                 else if(data.password !== data.confirmedPassword){

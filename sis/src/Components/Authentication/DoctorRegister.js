@@ -120,12 +120,12 @@ export default function DoctorRegisterationForm(){
                 formData.append("ConfirmPassword",data.confirmedPassword);
                 formData.append("NationalIdImage",data.idImage);
                 formData.append("Title",data.title);
-                formData.append("specilization",data.specialization);
-                formData.append("unidegree",data.unniversityDegree);
-                formData.append("cv",data.cv);
+                formData.append("Specialization",data.specialization);
+                formData.append("UniversityDegree",data.unniversityDegree);
+                formData.append("Cv",data.cv);
                 formData.append("AgreeToTerms",data.terms);
                 formData.append("Role", 2);
-                const res = await axios.post("",formData);
+                const res = await axios.post("https://ssis.runasp.net/api/Auth/register",formData);
             }
             catch(error){
                 console.log("ERROR DATA:", error.response?.data);
@@ -174,7 +174,7 @@ export default function DoctorRegisterationForm(){
                             </div>
                         </div>
                         <div className='col  row justify-content-center p-0 m-0 width'>
-                            <form className='form_container  row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 row-cols-1 p-2 w-75 m-2 rounded-2 justify-content-center'>
+                            <form className='form_container  row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 row-cols-1 p-2  m-2 rounded-2 justify-content-center'>
                                 <div className='col bg-white row justify-content-center'>
                                         <div className='col padding'>
                                                 <div >

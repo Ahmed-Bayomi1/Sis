@@ -21,6 +21,7 @@
     margin:8px;
 }
 .form_container{
+    width:90%;
     border: 3px rgb(76, 151, 205) solid;
     box-shadow: 0px 0px 3px blue;
 }
@@ -53,4 +54,7 @@
     color:red !important;
     background-color: white !important;
     /* border: 2px red solid !important; */
+}
+input{
+    padding:5px;
 }
