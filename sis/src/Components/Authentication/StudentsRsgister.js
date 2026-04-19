@@ -7,10 +7,12 @@ import Fail from '../Modals/Fail';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 import axios from "axios";
 
 export default function StudentRegisterationForm(){
+    let navigate = useNavigate("");
     const [data,setData] = useState({
         fullName:"",
         email:"",
@@ -222,7 +224,7 @@ export default function StudentRegisterationForm(){
                         </div>
                         <div className='row  justify-content-center align-items-end  p-2'>
                             <button disabled={!button} onClick={sendData} className='col w-auto text- border-0 p-2 rounded-2 m-1 register'>Register</button>
-                            <button className='col w-auto text-bg-danger border-0 p-2 rounded-2 m-1 account'>Have An Account</button>
+                            <button onClick={()=>{navigate("/StudentLogin")}} className='col w-auto text-bg-danger border-0 p-2 rounded-2 m-1 account'>Have An Account</button>
                         </div>
                     </form>
                 </div>
