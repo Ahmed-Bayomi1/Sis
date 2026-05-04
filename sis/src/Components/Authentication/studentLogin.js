@@ -2,15 +2,49 @@ import logo from '../../Images/logo.jpeg';
 import luxorUniversity from '../../Images/luxorUniversity.png';
 
 import { useState } from 'react';
-
+import axios from "axios";
 import './athentication.css';
 import './login.css';
+
+import Fail from '../Modals/Fail';
 
     export default function StudentLogin(){
         let [data,setData] = useState({
             email:"",
             password:"",
         });
+
+        const loginStudent = async () => {
+            try {
+                    const response = await axios.post(
+                    "https://your-api.com/login", // غير الرابط
+            {
+                email: data.email,
+                password: data.password,
+            }
+            );
+            return response.data;
+            } catch (error) {
+                throw error.response?.data || { message: "Server error" };
+            }     
+        };
+        const handleLogin = async (e) => {
+            e.preventDefault();
+
+            try {
+                const res = await loginStudent();
+
+                if (res.success) {
+                alert("Login success");
+                } else {
+                alert("Invalid email or password");
+                }
+
+            } catch (err) {
+                alert(err.message);
+            }
+            };
+
         return(
         <div className='studentRegister row justify-content-center align-items-center p-4 m-0'>
                     <div className=' row form-login  rounded-3 row-cols-md-2 row-cols-sm-1 row-cols-1 p-2'>
@@ -50,7 +84,7 @@ import './login.css';
                                 </div>
                                 <div className='col text-center'>
                                     <div className='row  justify-content-center align-items-end  p-2'>
-                                        <button  className='col w-50 text- border-0 p-2 rounded-2 m-1 register login12'>login</button>
+                                        <button type="submit" onClick={handleLogin}  className='col w-50 text- border-0 p-2 rounded-2 m-1 register login12'>login</button>
                                     </div>
                                     <a className='text-primary forgetPassword'>Forget Password??</a>
                                 </div>

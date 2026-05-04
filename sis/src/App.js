@@ -13,6 +13,7 @@ import StudentAffairRegister from './Components/Authentication/AffairsRegister.j
 import StudentLogin from './Components/Authentication/StudentLogin.js';
 import DoctorLogin from './Components/Authentication/DoctorLogin.js';
 import AffairsLogin from './Components/Authentication/AffairsLogin.js';
+import HomeStudent from './Components/Student/HomeStudent.js';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/StudentLogin" element={<StudentLogin/>}></Route>
         <Route path="/DoctorLogin" element={<DoctorLogin/>}></Route>
         <Route path="/AffairsLogin" element={<AffairsLogin/>}></Route>
+        <Route path="/HomeStudent" element={<HomeStudent/>}></Route>
       </Routes>
     </BrowserRouter>
   );
