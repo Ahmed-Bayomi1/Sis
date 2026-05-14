@@ -14,6 +14,8 @@ import StudentLogin from './Components/Authentication/StudentLogin.js';
 import DoctorLogin from './Components/Authentication/DoctorLogin.js';
 import AffairsLogin from './Components/Authentication/AffairsLogin.js';
 import HomeStudent from './Components/Student/HomeStudent.js';
+import HomeDoctor from './Components/Doctor/HomeDoctor.js';
+import HomeAffaris from './Components/Affairs/HomeAffaris.js';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/DoctorLogin" element={<DoctorLogin/>}></Route>
         <Route path="/AffairsLogin" element={<AffairsLogin/>}></Route>
         <Route path="/HomeStudent" element={<HomeStudent/>}></Route>
+        <Route path="/HomeDoctor" element={<HomeDoctor/>}></Route>
+        <Route path="/HomeAffaris" element={<HomeAffaris/>}></Route>
       </Routes>
     </BrowserRouter>
   );

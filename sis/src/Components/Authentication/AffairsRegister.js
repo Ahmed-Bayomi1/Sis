@@ -119,14 +119,42 @@ export default function AffairRegisterationForm(){
                 formData.append("ConfirmPassword",data.confirmedPassword);
                 formData.append("NationalIdImage",data.idImage);
                 formData.append("AdminCode",data.adminCode);
+                formData.append("Title",data.adminCode);
                 formData.append("AgreeToTerms",data.terms);
                 formData.append("Role", 1);
                 const res = await axios.post("https://ssis.runasp.net/api/Auth/register",formData);
             }
-            catch(error){
-                console.log("ERROR DATA:", error.response?.data);
-                console.log("STATUS:", error.response?.status);
-                }
+            catch (error) {
+    console.log("FULL ERROR:", error);
+
+    let errorMessage = "Registration failed";
+
+    if (error.response) {
+        // ✅ لو السيرفر بيرجع رسالة واحدة
+        if (typeof error.response.data === "string") {
+            errorMessage = error.response.data;
+        }
+
+        // ✅ لو السيرفر بيرجع object فيه message
+        else if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+        }
+
+        // ✅ لو بيرجع validation errors (زي ASP.NET)
+        else if (error.response.data.errors) {
+            const errors = error.response.data.errors;
+
+            // جمع كل الأخطاء في string واحد
+            errorMessage = Object.values(errors)
+                .flat()
+                .join(" | ");
+        }
+    }
+
+    setSuccessModal(false);
+    selFailmodal(true);
+    setMessage(errorMessage);
+}
         }else{
                 if(y === 0){
                     setMessage("password must have at least one character")
