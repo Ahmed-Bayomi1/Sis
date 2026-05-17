@@ -1,0 +1,81 @@
+/* Form Container */
+.course-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+/* Inputs */
+.course-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fff;
+    outline: none;
+    transition: 0.2s;
+}
+
+.course-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* Group (Doctor & Prerequisite) */
+.course-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Load Buttons */
+.course-load-btn {
+    width: fit-content;
+    padding: 8px 14px;
+    background: #e2e8f0;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.course-load-btn:hover {
+    background: #cbd5f5;
+}
+
+/* Select */
+.course-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: white;
+    font-size: 14px;
+}
+
+/* Submit Button */
+.course-submit {
+    margin-top: 10px;
+    padding: 12px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.course-submit:hover {
+    background: #2563eb;
+}
+
+/* Loading Text */
+.course-loading {
+    font-size: 13px;
+    color: #64748b;
+}

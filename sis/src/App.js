@@ -16,6 +16,12 @@ import AffairsLogin from './Components/Authentication/AffairsLogin.js';
 import HomeStudent from './Components/Student/HomeStudent.js';
 import HomeDoctor from './Components/Doctor/HomeDoctor.js';
 import HomeAffaris from './Components/Affairs/HomeAffaris.js';
+import StudentReview from './Components/Affairs/StudentReview.js';
+import Teacher from './Components/Affairs/Teacher.js';
+import AffairsCourses from './Components/Affairs/AffairsCourses.js';
+import Courses from './Components/Student/Courses.js';
+import Grades from './Components/Student/Grades.js';
+import Payment from './Components/Student/Payment.js';
 
 function App() {
   return (
@@ -31,6 +37,12 @@ function App() {
         <Route path="/HomeStudent" element={<HomeStudent/>}></Route>
         <Route path="/HomeDoctor" element={<HomeDoctor/>}></Route>
         <Route path="/HomeAffaris" element={<HomeAffaris/>}></Route>
+        <Route path="/StudentReview" element={<StudentReview/>}></Route>
+        <Route path="/Teacher" element={<Teacher/>}></Route>
+        <Route path="/AffairsCourses" element={<AffairsCourses/>}></Route>
+        <Route path="/Courses" element={<Courses/>}></Route>
+        <Route path="/Grades" element={<Grades/>}></Route>
+        <Route path="/Payment" element={<Payment/>}></Route>
       </Routes>
     </BrowserRouter>
   );

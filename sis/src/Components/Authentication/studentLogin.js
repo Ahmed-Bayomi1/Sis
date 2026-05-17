@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function StudentLogin() {
+
   const navigate = useNavigate();
 
   const [failModal, setFailModal] = useState(false);
@@ -21,15 +22,16 @@ export default function StudentLogin() {
     password: "",
   });
 
-  // ✅ قفل الـ modal عند الضغط
+  // ✅ Close modal
   function closeModal() {
     if (failModal) {
       setFailModal(false);
     }
   }
 
-  // ✅ استخراج رسالة الخطأ
+  // ✅ Extract error message
   const getErrorMessage = (error) => {
+
     if (!error.response) {
       return "Network error. Please check your internet connection.";
     }
@@ -61,14 +63,16 @@ export default function StudentLogin() {
     return response.data;
   };
 
-  // ✅ handle login
+  // ✅ Handle login
   const handleLogin = async (e) => {
+
     e.preventDefault();
 
     setFailModal(false);
     setErrorMessage("");
 
     try {
+
       const res = await loginStudent(data);
 
       console.log("LOGIN RESPONSE:", res);
@@ -83,11 +87,24 @@ export default function StudentLogin() {
         throw new Error("Login succeeded but token was not returned.");
       }
 
+      // ✅ Extract username safely
+      const userName =
+        res?.userName ||
+        res?.username ||
+        res?.data?.userName ||
+        res?.data?.username ||
+        res?.name ||
+        "Student";
+
+      // ✅ Store in localStorage
       localStorage.setItem("token", token);
+      localStorage.setItem("userEmail", data.email);
+      localStorage.setItem("userName", userName);
 
       navigate("/HomeStudent");
 
     } catch (error) {
+
       console.log("LOGIN ERROR:", error);
 
       const msg = getErrorMessage(error);
@@ -98,22 +115,35 @@ export default function StudentLogin() {
   };
 
   return (
+
     <div
       onClick={closeModal}
       className='studentRegister row justify-content-center align-items-center p-4 m-0'
     >
+
       <div className='row form-login rounded-3 row-cols-md-2 row-cols-sm-1 row-cols-1 p-2'>
 
+        {/* Left Section */}
         <div className='col logos1 row justify-content-center align-items-center'>
+
           <div className='row'>
+
             <div className='col'>
+
               <h3 className='text-center' style={{ color: "#0a3f8e" }}>
                 Student Login Form
               </h3>
+
               <div className='row justify-content-evenly align-items-center text-center gap-1 p-2'>
+
                 <div className='col'>
-                  <img className='photoStyler rounded-2' src={logo} alt="logo" />
+                  <img
+                    className='photoStyler rounded-2'
+                    src={logo}
+                    alt="logo"
+                  />
                 </div>
+
                 <div className='col'>
                   <img
                     className='photoStyler rounded-2'
@@ -121,18 +151,28 @@ export default function StudentLogin() {
                     alt="luxor university"
                   />
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
 
+        {/* Right Section */}
         <div className='bottom-login col row align-items-center justify-content-center'>
+
           <form onSubmit={handleLogin}>
+
             <div className='row row-cols-lg-1 row-cols-md-1 row-cols-sm-2 row-cols-1 align-items-center'>
 
+              {/* Inputs */}
               <div className='col ps-5'>
+
                 <div className='col'>
-                  <label>Email </label>
+                  <label>Email</label>
+
                   <input
                     value={data.email}
                     onChange={(e) =>
@@ -147,6 +187,7 @@ export default function StudentLogin() {
 
                 <div className='col'>
                   <label>Password</label>
+
                   <input
                     value={data.password}
                     onChange={(e) =>
@@ -158,30 +199,43 @@ export default function StudentLogin() {
                     required
                   />
                 </div>
+
               </div>
 
+              {/* Button */}
               <div className='col text-center'>
+
                 <div className='row justify-content-center align-items-end p-2'>
+
                   <button
                     type="submit"
                     className='col w-50 border-0 p-2 rounded-2 m-1 register login12'
                   >
-                    login
+                    Login
                   </button>
+
                 </div>
-                <a className='text-primary forgetPassword'>Forget Password??</a>
+
+                <a className='text-primary forgetPassword'>
+                  Forget Password??
+                </a>
+
               </div>
 
             </div>
+
           </form>
+
         </div>
+
       </div>
 
-      {/* ✅ popup */}
+      {/* ✅ Error Modal */}
       <Fail
         visible={failModal}
         Message={errorMessage}
       />
+
     </div>
   );
 }
