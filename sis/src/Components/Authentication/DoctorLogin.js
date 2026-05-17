@@ -10,7 +10,7 @@
     import { useState } from 'react';
     import { useNavigate } from 'react-router-dom';
 
-    export default function Doctorlogin() {
+    export default function DoctorLogin() {
     const navigate = useNavigate();
 
     const [failModal, setFailModal] = useState(false);
@@ -21,14 +21,14 @@
         password: "",
     });
 
-    // ✅ قفل الـ modal عند الضغط
+    // ✅ Close modal on background click
     function closeModal() {
         if (failModal) {
         setFailModal(false);
         }
     }
 
-    // ✅ استخراج رسالة الخطأ
+    // ✅ Extract error message from API response
     const getErrorMessage = (error) => {
         if (!error.response) {
         return "Network error. Please check your internet connection.";
@@ -53,7 +53,7 @@
     };
 
     // ✅ API call
-    const loginStudent = async (payload) => {
+    const loginDoctor = async (payload) => {
         const response = await axios.post(
         "https://ssis.runasp.net/api/Auth/login",
         payload
@@ -61,7 +61,7 @@
         return response.data;
     };
 
-    // ✅ handle login
+    // ✅ Handle login
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -69,10 +69,11 @@
         setErrorMessage("");
 
         try {
-        const res = await loginStudent(data);
+        const res = await loginDoctor(data);
 
         console.log("LOGIN RESPONSE:", res);
 
+        // ✅ Extract token
         const token =
             res?.token ||
             res?.Token ||
@@ -83,7 +84,26 @@
             throw new Error("Login succeeded but token was not returned.");
         }
 
-        localStorage.setItem("token", token);
+        // ✅ Extract username
+        const userName =
+            res?.userName ||
+            res?.username ||
+            res?.data?.userName ||
+            res?.data?.username ||
+            res?.name ||
+            "Doctor";
+
+        // ✅ Extract email (fallback to what the user typed)
+        const userEmail =
+            res?.email ||
+            res?.data?.email ||
+            data.email;
+
+        // ✅ Save to localStorage
+        localStorage.setItem("token",     token);
+        localStorage.setItem("userEmail", userEmail);
+        localStorage.setItem("userName",  userName);
+        localStorage.setItem("userRole",  "doctor");
 
         navigate("/HomeDoctor");
 
@@ -104,6 +124,7 @@
         >
         <div className='row form-login rounded-3 row-cols-md-2 row-cols-sm-1 row-cols-1 p-2'>
 
+            {/* Left Section */}
             <div className='col logos1 row justify-content-center align-items-center'>
             <div className='row'>
                 <div className='col'>
@@ -126,13 +147,15 @@
             </div>
             </div>
 
+            {/* Right Section */}
             <div className='bottom-login col row align-items-center justify-content-center'>
             <form onSubmit={handleLogin}>
                 <div className='row row-cols-lg-1 row-cols-md-1 row-cols-sm-2 row-cols-1 align-items-center'>
 
+                {/* Inputs */}
                 <div className='col ps-5'>
                     <div className='col'>
-                    <label>Email </label>
+                    <label>Email</label>
                     <input
                         value={data.email}
                         onChange={(e) =>
@@ -160,13 +183,14 @@
                     </div>
                 </div>
 
+                {/* Button */}
                 <div className='col text-center'>
                     <div className='row justify-content-center align-items-end p-2'>
                     <button
                         type="submit"
                         className='col w-50 border-0 p-2 rounded-2 m-1 register login12'
                     >
-                        login
+                        Login
                     </button>
                     </div>
                     <a className='text-primary forgetPassword'>Forget Password??</a>
@@ -175,13 +199,15 @@
                 </div>
             </form>
             </div>
+
         </div>
 
-        {/* ✅ popup */}
+        {/* ✅ Error Modal */}
         <Fail
             visible={failModal}
             Message={errorMessage}
         />
+
         </div>
     );
     }
