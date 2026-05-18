@@ -21,11 +21,11 @@ import {
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const SidebarItems = [
-    { label: "Overview", icon: FiClipboard },
-    { label: "Add  Courses", icon: FaGraduationCap },
-    { label: "Grades", icon: FaChalkboardTeacher },
-    { label: "Payment", icon: FiBookOpen },
-    // { label: "Courses",  icon: FiUsers },
+    { label: "Overview",    icon: FiClipboard },
+    { label: "Courses", icon: FaGraduationCap },      // ← single space (was double)
+    { label: "Grades",      icon: FaChalkboardTeacher },
+    { label: "Payment",     icon: FiBookOpen },
+    { label: "Schedule",    icon: FaCalendarCheck },
 ];
 
 const ROUTE_MAP = {
@@ -34,11 +34,11 @@ const ROUTE_MAP = {
 };
 
 const NAV_ROUTES = {
-    Overview:              "/HomeStudent",
-    "Add  Courses": "/Courses",      // ✅ fixed
-    Grades:              "/Grades",
-    Payment:             "/Payment",
-    // Courses:               "/Courses",
+    Overview:      "/HomeStudent",
+    "Courses": "/Courses",
+    Grades:        "/Grades",
+    Payment:       "/Payment",
+    Schedule:      "/Sch",
 };
 
 // ─── GPA Pie Chart Component ──────────────────────────────────────────────────
@@ -115,7 +115,7 @@ function GPAPieChart({ gpa }) {
 }
 
 // ─── Notification Item ────────────────────────────────────────────────────────
-function NotificationItem({ notification, index }) {
+function NotificationItem({ notification }) {
 
     const typeConfig = {
         warning: { color: "#F59E0B", bg: "#FFFBEB", icon: <FaExclamationTriangle /> },
@@ -168,15 +168,15 @@ export default function HomeStudent() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [active,         setActive]         = useState("Overview");
-    const [sidebarOpen,    setSidebarOpen]    = useState(false);
-    const [studentName]                       = useState(localStorage.getItem("userName")  || "Student");
-    const [studentEmail]                      = useState(localStorage.getItem("userEmail") || "student@met.com");
-    const [statCards,      setStatCards]      = useState([]);
-    const [gpa,            setGpa]            = useState(0);
-    const [notifications,  setNotifications]  = useState([]);
-    const [loading,        setLoading]        = useState(true);
-    const [loadError,      setLoadError]      = useState("");
+    const [active,         setActive]        = useState("Overview");
+    const [sidebarOpen,    setSidebarOpen]   = useState(false);
+    const [studentName]                      = useState(localStorage.getItem("userName")  || "Student");
+    const [studentEmail]                     = useState(localStorage.getItem("userEmail") || "student@met.com");
+    const [statCards,      setStatCards]     = useState([]);
+    const [gpa,            setGpa]           = useState(0);
+    const [notifications,  setNotifications] = useState([]);
+    const [loading,        setLoading]       = useState(true);
+    const [loadError,      setLoadError]     = useState("");
 
     // ─── Logout ───────────────────────────────────────────────────────────────
     const handleLogout = useCallback(() => {
@@ -209,8 +209,6 @@ export default function HomeStudent() {
                     "https://ssis.runasp.net/api/v1/dashboard/student",
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
-
-                console.log("✅ Student Dashboard:", res.data);
 
                 let d = res.data?.data ?? res.data?.result ?? res.data;
 
@@ -255,7 +253,6 @@ export default function HomeStudent() {
 
             } catch (err) {
 
-                console.error("❌ Dashboard Error:", err);
                 const status = err.response?.status;
 
                 if (status === 401) {
@@ -480,7 +477,7 @@ export default function HomeStudent() {
                                     <div style={{ overflowY: "auto", maxHeight: "340px", paddingRight: "4px" }}>
                                         {notifications.length > 0 ? (
                                             notifications.map((n, i) => (
-                                                <NotificationItem key={i} notification={n} index={i} />
+                                                <NotificationItem key={i} notification={n} />
                                             ))
                                         ) : (
                                             <div style={{

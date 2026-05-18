@@ -25,6 +25,7 @@ const HomeStudent         = lazy(() => import('../Components/Student/HomeStudent
 const Courses             = lazy(() => import('../Components/Student/Courses'));
 const Grades              = lazy(() => import('../Components/Student/Grades'));
 const Payment             = lazy(() => import('../Components/Student/Payment'));
+const Sch                 = lazy(() => import('../Components/Student/Sch'));
 
 // Protected — Doctor dashboard
 const HomeDoctor          = lazy(() => import('../Components/Doctor/HomeDoctor'));
@@ -35,6 +36,7 @@ const HomeAffaris         = lazy(() => import('../Components/Affairs/HomeAffaris
 const StudentReview       = lazy(() => import('../Components/Affairs/StudentReview'));
 const Teacher             = lazy(() => import('../Components/Affairs/Teacher'));
 const AffairsCourses      = lazy(() => import('../Components/Affairs/AffairsCourses'));
+const Tables              = lazy(() => import('../Components/Affairs/Tables'));
 
 // 404
 const NotFound            = lazy(() => import('../pages/NotFound'));
@@ -82,6 +84,7 @@ export default function AppRoutes() {
     <Route path="/Courses"     element={<Courses />} />
     <Route path="/Grades"      element={<Grades />} />
     <Route path="/Payment"     element={<Payment />} />
+    <Route path="/Sch"          element={<Sch />} />
   </Route>
 
   {/* Protected — Doctor */}
@@ -96,6 +99,7 @@ export default function AppRoutes() {
     <Route path="/StudentReview"  element={<StudentReview />} />
     <Route path="/Teacher"        element={<Teacher />} />
     <Route path="/AffairsCourses" element={<AffairsCourses />} />
+    <Route path="/Tables"         element={<Tables />} />
   </Route>
 
   {/* 404 */}

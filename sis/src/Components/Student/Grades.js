@@ -21,9 +21,10 @@ import {
 
 const SidebarItems = [
     { label: "Overview",    icon: FiClipboard },
-    { label: "Add Courses", icon: FaGraduationCap },
+    { label: "Courses", icon: FaGraduationCap },
     { label: "Grades",      icon: FaChalkboardTeacher },
     { label: "Payment",     icon: FiBookOpen },
+    { label: "Schedule",    icon: FaCalendarCheck },
 ];
 
 const ROUTE_MAP = {
@@ -33,9 +34,10 @@ const ROUTE_MAP = {
 
 const NAV_ROUTES = {
     Overview:      "/HomeStudent",
-    "Add Courses": "/Courses",
+    "Courses": "/Courses",
     Grades:        "/Grades",
     Payment:       "/Payment",
+    Schedule:      "/Sch",
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

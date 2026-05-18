@@ -23,6 +23,7 @@ const SidebarItems = [
     { label: "Students", icon: FaGraduationCap, path: "/StudentReview" },
     { label: "Teachers", icon: FaChalkboardTeacher, path: "/Teacher" },
     { label: "Courses", icon: FiUsers, path: "/AffairsCourses" },
+    { label: "Tables", icon: FiUsers, path: "/Tables" },
 ];
 
 export default function LayoutOnly() {

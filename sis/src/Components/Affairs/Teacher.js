@@ -16,6 +16,8 @@ import {
     FiClipboard,
 } from "react-icons/fi";
 
+
+
 import {
     FaGraduationCap,
     FaChalkboardTeacher,
@@ -43,6 +45,9 @@ const SidebarItems = [
         icon: FiUsers,
         path: "/AffairsCourses"
     },
+    {
+        label: "Tables",
+        icon: FiUsers,}
 ];
 
 export default function Teacher() {

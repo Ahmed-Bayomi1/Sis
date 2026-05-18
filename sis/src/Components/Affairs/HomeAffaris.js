@@ -29,12 +29,22 @@ api.interceptors.request.use((config) => {
 });
 
 // ─── Sidebar config ───────────────────────────────────────────────────────────
+// const SidebarItems = [
+//     { label: "Overview",  icon: FiClipboard },
+//     { label: "Students",  icon: FaGraduationCap },
+//     { label: "Teachers",  icon: FaChalkboardTeacher },
+//     { label: "Courses",   icon: FiUsers },
+//     { label: "Tables",    icon: FiUsers },
+
+// ];
 const SidebarItems = [
-    { label: "Overview",  icon: FiClipboard },
-    { label: "Students",  icon: FaGraduationCap },
-    { label: "Teachers",  icon: FaChalkboardTeacher },
-    { label: "Courses",   icon: FiUsers },
+    { label: "Overview", icon: FiClipboard, path: "/HomeAffaris" },
+    { label: "Students", icon: FaGraduationCap, path: "/StudentReview" },
+    { label: "Teachers", icon: FaChalkboardTeacher, path: "/Teacher" },
+    { label: "Courses", icon: FiUsers, path: "/AffairsCourses" },
+    { label: "Tables", icon: FiUsers, path: "/Tables" },
 ];
+
 
 const ROUTE_MAP = {
     "/HomeAffaris":    "Overview",
@@ -42,6 +52,7 @@ const ROUTE_MAP = {
     "/StudentReview":  "Students",
     "/Teacher":        "Teachers",
     "/AffairsCourses": "Courses",
+    "/Tables":         "Tables",
 };
 
 export default function HomeAffaris() {
